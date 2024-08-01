@@ -1,6 +1,6 @@
 import telebot
 
-bot = telebot.TeleBot("7486481919:AAG83GuZ5Qaq-3g3jEGxqw1EhiGHsROx7EY")
+bot = telebot.TeleBot("Paste your ID there")
 
 @bot.message_handler(content_types=['text'])
 def get_text_messages(message):
