@@ -1,14 +1,35 @@
 import telebot
+botID = ('botID')
+bot = telebot.TeleBot(botID)
 
-bot = telebot.TeleBot("Paste your ID there")
 
-@bot.message_handler(content_types=['text'])
-def get_text_messages(message):
-  if message.text == "Привет":
-    bot.send_message(message.from_user.id, "Привет, чем я могу тебе помочь?")
-  elif message.text == "/help":
-    bot.send_message(message.from_user.id, "Напиши Привет")
-  else:
-    bot.send_message(message.from_user.id, "Я не знаю такой команды. Напиши /help.")
+@bot.message_handler(commands=['start'])
+def start_message(message):
+    markup = telebot.types.InlineKeyboardMarkup()
+    markup.row(
+        telebot.types.InlineKeyboardButton("mebyri", callback_data='liqod1'),
+        telebot.types.InlineKeyboardButton("okak", callback_data='okak2')
+    )
+    bot.send_message(message.chat.id, "Выберите человека:", reply_markup=markup)
 
-bot.polling(none_stop=True, interval=0)
+@bot.callback_query_handler(func=lambda call: True)
+def handle_callback_query(call):
+    if call.data == 'liqod1':
+        markup = telebot.types.InlineKeyboardMarkup()
+        markup.row(
+            telebot.types.InlineKeyboardButton("YouTube", url="https://www.youtube.com/@mebyri"),
+            telebot.types.InlineKeyboardButton("Twitch", url="https://www.twitch.tv/mebyri") 
+        )
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, 
+                             text="Выберите платформу:", reply_markup=markup)
+    elif call.data == 'okak2':
+        markup = telebot.types.InlineKeyboardMarkup()
+        markup.row(
+            telebot.types.InlineKeyboardButton("YouTube", url="https://www.youtube.com/channel/UCuL9MARHcuA17yIcpMrjkEQ"),
+            telebot.types.InlineKeyboardButton("Twitch", url="https://www.twitch.tv/okak__")
+        )
+        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, 
+                             text="Выберите платформу:", reply_markup=markup)
+
+bot.polling()
+ 
