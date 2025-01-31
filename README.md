@@ -4,6 +4,6 @@
 Спасибо!
 
 Свзять со мной:
-Mail - Chernigovskij@outlook.com
-Telegram - @okak_k
-Discord - nuckpons
+eMail - Chernigovskij@outlook.com
+Telegram - @okakc
+Discord - okakc
